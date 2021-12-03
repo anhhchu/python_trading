@@ -5,43 +5,8 @@ import numpy as np
 import kaleido
 
 ### Reference: https://www.alpharithms.com/calculate-macd-python-272222/ ***
+        
 
-# def draw_candlestick_MA(ticker, df, window1, window2):
-#         # Calculate and define moving average of window1 periods
-#         avg1 = df.Close.rolling(window=window1, min_periods=1).mean()
-
-#         # Calculate and define moving average of window2 periods
-#         avg2 = df.Close.rolling(window=window2, min_periods=1).mean()
-        
-#         # Create figure with secondary y-axis
-#         fig = make_subplots(specs=[[{"secondary_y": True}]])
-        
-#         fig.add_trace(
-#             go.Bar(x=df.index, y=df.Volume,
-#                            name='Volume', opacity=0.3),secondary_y=True)
-        
-#         fig.add_trace(
-#             go.Candlestick(x=df.index, open=df.Open, close=df.Close, high=df.High, low=df.Low,
-#                            name=ticker),secondary_y=False)
-#         fig.add_trace(
-#             go.Scatter(x=df.index, y=avg1,
-#                            name=f'Moving Average of {window1} periods'),secondary_y=False)
-#         fig.add_trace(
-#             go.Scatter(x=df.index, y=avg2,
-#                            name=f'Moving Average of {window2} periods'),secondary_y=False)
-        
-#         fig.update_layout(legend=dict( orientation='h',yanchor='bottom', y=1.02, xanchor="right", x=1))
-        
-#         fig.update_traces(marker_color = 'rgba(0,0,250, 0.5)',
-#                   marker_line_width = 0,
-#                   selector=dict(type="bar"))
-        
-#         # Set y-axes titles
-#         fig.update_yaxes(title_text="USD", secondary_y=False)
-#         fig.update_yaxes(title_text="Shares", secondary_y=True)
-
-#         fig.show()
-        
 def draw_candlestick_MA(ticker, df, shorter_window, longer_window, is_static=False):
     # Calculate and define moving average of window1 periods
     avg1 = df.Close.rolling(window=shorter_window, min_periods=1).mean()
@@ -56,7 +21,7 @@ def draw_candlestick_MA(ticker, df, shorter_window, longer_window, is_static=Fal
     # Add Volume
     fig.add_trace(
         go.Bar(x=df.index, y=df.Volume,
-                       name='Volume', opacity=0.3), row=1, col=1, secondary_y=True
+                       name='Volume', opacity=0.8), row=1, col=1, secondary_y=True
     )
     
     # Candlestick chart for pricing
@@ -133,9 +98,6 @@ def draw_candlestick_MA(ticker, df, shorter_window, longer_window, is_static=Fal
     )
     # Update options and show plot
     fig.update_layout(layout)
-    # Set y-axes titles
-    #fig.update_yaxes(title_text="USD", secondary_y=False)
-    #fig.update_yaxes(title_text="Shares", secondary_y=True)
     if not is_static:
         fig.show()
     else:
