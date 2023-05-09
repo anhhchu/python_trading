@@ -1,0 +1,4 @@
+pandas_ta
+yfinance
+plotly
+keras
